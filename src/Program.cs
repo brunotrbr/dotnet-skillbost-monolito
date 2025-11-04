@@ -1,24 +1,32 @@
-using System.Runtime.InteropServices.Marshalling;
+using src.Repository;
+using src.Repository.Interface;
+using src.Service;
+using src.Service.Interface;
 
-var builder = WebApplication.CreateBuilder(args);
+namespace src;
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+public class Program
 {
-    app.MapOpenApi();
+    public static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
+
+        builder.Services.AddScoped<ICourseActivityService, CourseActivityService>();
+        builder.Services.AddScoped<ICourseService, CourseService>();
+        builder.Services.AddScoped<IProfileService, ProfileService>();
+
+        builder.Services.AddScoped<ICourseActivityRepository, CourseActivityRepository>();
+        builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+        builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
+
+        builder.Services.AddControllers();
+
+        var app = builder.Build();
+
+        // app.UseHttpsRedirection();
+
+        app.MapControllers();
+
+        app.Run();
+    }
 }
-
-app.UseHttpsRedirection();
-
-
-
-app.Run();
-
-// Como configurar as controllers
-// https://learn.microsoft.com/en-us/aspnet/core/fundamentals/apis?view=aspnetcore-9.0

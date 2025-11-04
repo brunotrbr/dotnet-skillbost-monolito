@@ -17,17 +17,12 @@ public class CourseActivityRepository : ICourseActivityRepository
         throw new NotImplementedException();
     }
 
-    public Task<List<CourseActivity>> FindAllByCourseId(long courseId)
+    public Task<CourseActivity> Get(long activityId)
     {
         throw new NotImplementedException();
     }
 
-    public Task<CourseActivity> FindCourseActivityById(long activityId)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<CourseActivity> Get(long courseId, long activityId)
+    public Task<List<CourseActivity>> GetAllByCourseId(long courseId)
     {
         throw new NotImplementedException();
     }
